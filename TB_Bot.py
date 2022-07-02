@@ -61,11 +61,11 @@ def echo_all(message):
 
             for name in cur.execute('SELECT NAME FROM Triangle_Kino WHERE NAME LIKE ?', ('%' + word + '%',)):
                 name_list.append(name[0])
-            for opisanie in cur.execute('SELECT NAME FROM Triangle_Kino WHERE NAME LIKE ?', ('%' + word + '%',)):
+            for opisanie in cur.execute('SELECT OPISANIE FROM Triangle_Kino WHERE NAME LIKE ?', ('%' + word + '%',)):
                 opisanie_list.append(opisanie[0])
-            for god in cur.execute('SELECT NAME FROM Triangle_Kino WHERE NAME LIKE ?', ('%' + word + '%',)):
+            for god in cur.execute('SELECT GOD FROM Triangle_Kino WHERE NAME LIKE ?', ('%' + word + '%',)):
                 god_list.append(god[0])
-            for Link1 in cur.execute('SELECT NAME FROM Triangle_Kino WHERE NAME LIKE ?', ('%' + word + '%',)):
+            for Link1 in cur.execute('SELECT LINK FROM Triangle_Kino WHERE NAME LIKE ?', ('%' + word + '%',)):
                 Link1_list.append(Link1[0])
 
             for film in Link1_list:
