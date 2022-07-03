@@ -24,18 +24,22 @@ async def load_name(message: types.Message, state: FSMContext):
     await state.finish()
 
     db = sqlite3.connect('BD_Film_lordfilm.db')
+    print(db)
     cur = db.cursor()
+    print(cur)
 
-    name_list=[]
-    year_list=[]
-    kp_rate_list=[]
-    imdb_rate_list=[]
-    link_film_list=[]
-    link_img_list=[]
-    opisanie_list=[]
+    name_list = []
+    year_list = []
+    kp_rate_list = []
+    imdb_rate_list = []
+    link_film_list = []
+    link_img_list = []
+    opisanie_list = []
 
-    for name in cur.execute('SELECT NAME FROM BD_Film_lordfilm WHERE NAME LIKE?', ('%'+name_film+'%',)):
-        print(name)
-        print(name[0])
-        #name_list.append(name[0])
-    print(name_film)
+    f= cur.execute("SELECT * FROM BDFilm").fetchall()
+    print(f)
+    # for name in cur.execute('SELECT NAME FROM BDFilm WHERE NAME LIKE ?', ('%' + name_film + '%',)):
+    #     print(name)
+    #     print(name[0])
+        # name_list.append(name[0])
+
