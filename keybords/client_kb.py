@@ -2,7 +2,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemo
 
 b1 = KeyboardButton('/Найти_Фильм')
 #b2 = KeyboardButton('/Поиск_по_описанию')
-b3 = KeyboardButton('/Случайный')
+b3 = KeyboardButton('/Случайный_Фильм')
 
 kb_client = ReplyKeyboardMarkup(resize_keyboard=True)
 kb_client.add(b1).add(b3)

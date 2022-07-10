@@ -1,12 +1,12 @@
 import sqlite3
 from create_bot import dp, bot
+from random import randint
 
-
-# from aiogram.types import URLInputFile
 
 # Пользовательская функция изменения регистра
 def myfunc(s):
     return s.lower()
+
 
 def sql_start():
     global db, cur
@@ -17,9 +17,6 @@ def sql_start():
         print(f'База данных BD_Film_lordfilm.db подключена')
 
 
-
-
-
 async def find_Film_name(message):
     name_list = []
     year_list = []
@@ -28,11 +25,14 @@ async def find_Film_name(message):
     link_film_list = []
     link_img_list = []
     opisanie_list = []
-    for name1 in cur.execute('SELECT NAME FROM BD_Film_lordfilm WHERE mylower(NAME) LIKE ?', ('%' + message.text.lower() + '%',)):
+    for name1 in cur.execute('SELECT NAME FROM BD_Film_lordfilm WHERE mylower(NAME) LIKE ?',
+                             ('%' + message.text.lower() + '%',)):
         name_list.append(name1[0])
-    for year1 in cur.execute('SELECT YEAR FROM BD_Film_lordfilm WHERE mylower(NAME) LIKE ?', ('%' + message.text.lower() + '%',)):
+    for year1 in cur.execute('SELECT YEAR FROM BD_Film_lordfilm WHERE mylower(NAME) LIKE ?',
+                             ('%' + message.text.lower() + '%',)):
         year_list.append(year1[0])
-    for kp_rate1 in cur.execute('SELECT KP_RATE FROM BD_Film_lordfilm WHERE mylower(NAME) LIKE ?', ('%' + message.text.lower() + '%',)):
+    for kp_rate1 in cur.execute('SELECT KP_RATE FROM BD_Film_lordfilm WHERE mylower(NAME) LIKE ?',
+                                ('%' + message.text.lower() + '%',)):
         kp_rate_list.append(kp_rate1[0])
     for imdb_rate1 in cur.execute('SELECT IMDB_RATE FROM BD_Film_lordfilm WHERE mylower(NAME) LIKE ?',
                                   ('%' + message.text.lower() + '%',)):
@@ -53,3 +53,14 @@ async def find_Film_name(message):
                              caption=f'Название фильма: {name_list[i]}\nГод: {year_list[i]}\nРейтинг КП: {kp_rate_list[i]}\nРейтинг IMDB: {imdb_rate_list[i]}\nОписание: {opisanie_list[i]}\nСсылка на фильм: {link_film_list[i]}')
 
     return len(name_list)
+
+
+async def find_Film_random(message):
+    r = randint(1, 37521)
+    rnd_film = cur.execute(
+        'SELECT NAME, YEAR, KP_RATE, IMDB_RATE, LINK_FILM, LINK_IMG, OPISANIE FROM BD_Film_lordfilm WHERE ID == ?',
+        (r,))
+    sfilm=rnd_film.fetchall()[0]
+
+    await bot.send_photo(message.from_user.id, photo=sfilm[5],
+                         caption=f'Название фильма: {sfilm[0]}\nГод: {sfilm[1]}\nРейтинг КП: {sfilm[2]}\nРейтинг IMDB: {sfilm[3]}\nОписание: {sfilm[6]}\nСсылка на фильм: {sfilm[4]}')
