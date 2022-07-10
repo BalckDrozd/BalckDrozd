@@ -18,8 +18,8 @@ async def find_name(message: types.Message):
 
 
 #@dp.message_handler(commands=['Поиск по описанию'])
-async def find_opisanie(message: types.Message):
-    await bot.send_message(message.from_user.id, 'Введите пару слов про фильм')
+# async def find_opisanie(message: types.Message):
+#     await bot.send_message(message.from_user.id, 'Введите пару слов про фильм')
 
 #@dp.message_handler(commands=['Случайный'])
 async def find_random(message: types.Message):
@@ -27,8 +27,8 @@ async def find_random(message: types.Message):
 
 def register_handlers_client(dp:Dispatcher):
     dp.register_message_handler(command_start, commands=['start', 'help'])
-    dp.register_message_handler(find_name, commands=['Поиск_по_названию'])
-    dp.register_message_handler(find_opisanie, commands=['Поиск_по_описанию'])
+    dp.register_message_handler(find_name, commands=['Найти_Фильм'])
+    #dp.register_message_handler(find_opisanie, commands=['Поиск_по_описанию'])
     dp.register_message_handler(find_random, commands=['Случайный'])
 
 
